@@ -88,19 +88,19 @@ Visualizations help in communicating the findings from the data in an easily int
 
 
 ## 1. Total Fatal Injuries by Country
-![Total Fatal Injuries by Country](visuals/fatalbycountry.png)
+![Total Fatal Injuries by Country](Visuals/fatalbycountry.png)
 
 ## 2. Fatalities by Purpose of Aircraft
-![Fatalities by Aircraft purpose](images/fatalitiesbypurpose.png)
+![Fatalities by Aircraft purpose](Visuals/fatalitiesbypurpose.png)
 
 ## 3. Correlation Heatmap
-![Number of Engines vs. Fatal Injuries](images/correlationheatmap.png)
+![Number of Engines vs. Fatal Injuries](Visuals/correlationheatmap.png)
 
 ## 4. Fatalities by Make
-![Total fatalities by Make](images/fatalitiesbymake.png)
+![Total fatalities by Make](Visuals/fatalitiesbymake.png)
 
 
-   ```
+
 # Findings
 
 ## 1. Geographic Distribution of Fatalities
