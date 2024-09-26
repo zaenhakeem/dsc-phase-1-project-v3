@@ -1,5 +1,5 @@
 # Aviation Risk Analysis Project
-
+[Tableau Dashboard Link](https://public.tableau.com/views/project-wb-09-26-2024-AI/overallInsights?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 ## Overview
 
 This analysis aims to help the company expand into the aviation industry by the accident that have occurred over the years.The aim of the analysis is to help the company determine which aircraft will present the lowest risk for the company. The data used for this analysis comes from the [National Database Accident Database](https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses) and it coverers all civil aviation accidents and selected incidents from 1962 to 2023.
