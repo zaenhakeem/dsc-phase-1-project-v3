@@ -23,14 +23,154 @@ The dataset used in this project comes from the National Transportation Safety B
 - Location
 - Additional metadata such as weather conditions, flight phases, etc.
 
-### Data Cleaning and Preparation
-Missing values were handled by appropriate imputation methods, and the dataset was cleaned to ensure consistency and accuracy before analysis. Outliers were investigated, and non-relevant columns were removed to focus on variables directly related to the risk of accidents.
+# Aviation Accident Data Analysis
 
-### Visualizations
-1. **Accident Frequency by Aircraft Model**: A bar chart showing which aircraft models have the highest and lowest accident frequencies.
-2. **Trend of Accidents Over Time**: A line graph showing how accident rates have changed over the years for different aircraft.
-3. **Risk Factors Correlation**: A heatmap indicating correlations between various factors (aircraft size, weather, time of day) and accident risk.
+## Data Cleaning
 
+Data cleaning is a critical step before conducting any analysis or creating visualizations. It ensures that the dataset is consistent, accurate, and free from unwanted noise. Below are the specific steps we took in cleaning the dataset.
+
+### Steps Taken for Data Cleaning:
+
+1. **Handling Missing Values**:
+   - Some columns had a large number of missing values (e.g., `Latitude`, `Longitude`, `Airport.Code`, `Airport.Name`, `Air.carrier`).
+   - We chose to drop columns with excessive missing values that were not directly related to the analysis or would not provide meaningful insights.
+   - For numerical columns, such as `Number.of.Engines` and `Total.Fatal.Injuries`, we used the median to fill missing values where appropriate, as these columns contain skewed data.
+
+2. **Dropping Irrelevant Columns**:
+   - The following columns were dropped: `Accident.Number`, `Schedule`, `FAR.Description`, `Airport.Code`, `Airport.Name`, `Air.carrier`.
+   - These columns were either identifiers, contained too many missing values, or did not add value to our analysis.
+
+3. **Handling Duplicates**:
+   - We checked for duplicate records and removed any to ensure data integrity.
+
+4. **Outlier Detection**:
+   - We identified and handled outliers in critical columns like `Total.Fatal.Injuries` to avoid skewed analysis.
+
+---
+
+## Exploratory Data Analysis (EDA)
+
+EDA allows us to explore and understand the data more deeply, providing initial insights into the trends and relationships within the dataset.
+
+### Key EDA Steps:
+
+1. **Basic Statistics**:
+   - We reviewed the dataset's descriptive statistics, including measures such as the mean, median, and standard deviation.
+   - This provided a general overview of the dataset, helping us identify trends, such as the distribution of injuries and the number of engines involved.
+
+2. **Correlation Analysis**:
+   - We computed a correlation matrix to understand the relationships between numerical columns like `Total.Fatal.Injuries`, `Number.of.Engines`, and others.
+   - For instance, we found a positive correlation between `Number.of.Engines` and `Total.Fatal.Injuries`, indicating that accidents involving more engines tended to have higher fatalities.
+
+3. **Groupby Analysis**:
+   - Grouped data by key columns such as `Country` and `Make` to identify trends in fatalities and accidents.
+   - Example: Grouped `Country` by `Total.Fatal.Injuries` to understand which countries had the highest number of fatalities.
+
+4. **Unique Values Exploration**:
+   - We used `.unique()` and `.map()` to explore unique values and remap categories in the dataset for better clarity.
+
+---
+
+## Data Visualization
+
+Visualizations help in communicating the findings from the data in an easily interpretable way. We used various visualizations to support our conclusions and highlight key insights.
+
+### Key Visualizations:
+
+1. **Correlation Heatmap**:
+   - We plotted a heatmap to visualize the correlations between the numerical variables in the dataset.
+   - This helped identify which factors were most associated with fatal accidents.
+
+2. **Pie Chart: Impact of Weather on Fatalities**:
+   - A pie chart was created to visualize the proportion of fatalities based on weather conditions (`IMC`, `VMC`, and `UNK`).
+   - This chart highlights how weather conditions can impact accident outcomes.
+   
+
+
+## 1. Total Fatal Injuries by Country
+![Total Fatal Injuries by Country](visuals/fatalbycountry.png)
+
+## 2. Fatalities by Purpose of Aircraft
+![Fatalities by Aircraft purpose](images/fatalitiesbypurpose.png)
+
+## 3. Correlation Heatmap
+![Number of Engines vs. Fatal Injuries](images/correlationheatmap.png)
+
+## 4. Fatalities by Make
+![Total fatalities by Make](images/fatalitiesbymake.png)
+
+
+   ```
+# Findings
+
+## 1. Geographic Distribution of Fatalities
+- The analysis revealed that the **United States** had the highest number of total fatalities, significantly more than other countries.
+- **Brazil**, **India**, **Canada**, and **Indonesia** also had substantial numbers of fatalities, though much lower than the U.S.
+- The high fatalities in these countries may be due to their large aviation industries and high volumes of air traffic.
+  
+  **Top 5 Countries by Total Fatalities:**
+  - United States: 37,092 fatalities
+  - Brazil: 1,254 fatalities
+  - India: 975 fatalities
+  - Canada: 971 fatalities
+  - Indonesia: 959 fatalities
+
+### Recommendation:
+Companies considering entering the aviation industry in high-risk countries such as the U.S. should factor in regional safety standards and potential risks. Investing in robust safety measures and better aircraft technology could help mitigate the risk of fatalities.
+
+---
+
+## 2. Weather Conditions and Fatalities
+- The data shows that accidents occurring under **Visual Meteorological Conditions (VMC)** account for the majority of fatalities (32,427), followed by **Instrument Meteorological Conditions (IMC)** with 12,075 fatalities.
+- Weather marked as **Unknown (UNK)** contributed a smaller, yet still significant, portion of the total fatalities.
+  
+  **Fatalities by Weather Condition:**
+  - VMC (Visual Conditions): 32,427 fatalities
+  - IMC (Instrument Conditions): 12,075 fatalities
+  - Unknown (UNK): 2,471 fatalities
+
+### Recommendation:
+If the company operates in regions with challenging weather conditions (e.g., frequent IMC), investing in aircraft equipped with advanced navigation and weather detection systems will be critical to minimizing risks.
+
+---
+
+## 3. Aircraft Make and Engine Configuration
+- The analysis of the **Number of Engines** revealed that aircraft with a higher number of engines tend to have more serious accidents with a higher number of fatalities.
+- Certain aircraft makes, such as **Kitty Hawk** and **JOBY AERO INC**, had more fatalities compared to others, while several manufacturers had 0 fatalities, indicating either low usage or better safety records.
+  
+  **Aircraft Make and Engine Fatalities (Top 5):**
+  - Kitty Hawk: 8 fatalities
+  - JOBY AERO INC: 6 fatalities
+  - Piasecki Aircraft Corp: 4 fatalities
+  - Lazair: 4 fatalities
+  - BAE Systems: 4 fatalities
+
+### Recommendation:
+When considering aircraft purchases, the company should evaluate the safety record of the manufacturer and consider aircraft with fewer engines, which could reduce the likelihood of severe accidents.
+
+---
+
+## 4. Purpose of Flight and Fatalities
+- Accidents related to **Personal flights** account for the highest number of fatalities (22,800), followed by **Unknown purposes** (9,967), and **Instructional flights** (2,958).
+- This highlights that personal flights, likely involving smaller, privately-owned aircraft, carry a higher risk of fatal accidents.
+
+### Recommendation:
+For companies entering the aviation industry, focusing on safety procedures for personal flights, such as additional training and safety checks, could help reduce fatalities.
+
+---
+
+## 5. Aircraft Damage
+- The data shows that the majority of fatal injuries occurred in accidents where the aircraft was **destroyed** (41,204 fatalities), followed by accidents resulting in **substantial damage** (14,234 fatalities).
+
+### Recommendation:
+Aircraft durability and construction quality are key factors in reducing fatalities. The company should consider purchasing aircraft models with a lower likelihood of destruction in case of accidents.
+
+---
+
+## Conclusion
+In summary, the analysis highlights several risk factors that the company must consider when entering the aviation industry. Geographic risks, weather conditions, engine configurations, and the purpose of flights all play a significant role in determining the risk of fatalities. By choosing aircraft with strong safety records, advanced technology for challenging weather conditions, and prioritizing regions with lower fatality rates, the company can mitigate potential risks and make more informed purchasing decisions.
+
+   
 ### Business Recommendations
 Based on the analysis, the following three recommendations can be made for minimizing risks when expanding into the aviation sector:
 1. **Prioritize newer models with lower accident rates**: Certain aircraft models, especially newer ones, consistently show a lower frequency of accidents. These should be prioritized for purchase.
@@ -43,4 +183,3 @@ Through this analysis, we have identified clear patterns that can guide the comp
 
 ---
 
-### Repository Structure
